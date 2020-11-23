@@ -4,14 +4,14 @@ import App from "./components/App";
 import reportWebVitals from "./reportWebVitals";
 import axios from "axios";
 import { Provider } from "react-redux";
-import { StoreState } from "./reducers";
+import { store } from "./reducers";
 
 axios.defaults.withCredentials = true;
 axios.defaults.baseURL = "https://rem-rest-api.herokuapp.com/api";
 
 ReactDOM.render(
   <React.StrictMode>
-    <Provider state={StoreState}>
+    <Provider state={store}>
       <App />
     </Provider>
   </React.StrictMode>,
