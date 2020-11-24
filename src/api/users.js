@@ -10,3 +10,7 @@ export const getUsers = () => {
     },
   });
 };
+
+export const createUser = (user) => {
+  return axios.post("/users", user);
+};

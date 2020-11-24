@@ -8,6 +8,15 @@ This project was bootstrapped with [Create React App](https://github.com/faceboo
 
 Install yarn
 
+Required settings
+As of February 2020, chrome has blocked cross-site cookies by default which means the REM Rest API will no longer work. To get around this go to chrome://flags/ in a new tab in chrome, then disable the following options:
+
+- SameSite by default cookies
+
+- Enable removing SameSite=None cookies
+
+- Cookies without SameSite must be secure
+
 ## Installation
 
 - Install dependencies by running yarn in the project root folder
