@@ -1,5 +1,5 @@
 import { connect } from "react-redux";
-const { getUsersRequest } = require("../actions/users");
+const { getUsersRequest } = require("../store/actions/users");
 
 function _App(props) {
   return (

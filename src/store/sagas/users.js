@@ -1,6 +1,6 @@
 import { takeEvery, call, put, fork } from "redux-saga/effects";
 import * as actions from "../actions/users";
-import * as api from "../api/users";
+import * as api from "../../api/users";
 
 function* watchGetUsersRequest() {
   yield takeEvery(actions.Types.GET_USERS_REQUEST, getUsers);
