@@ -1,18 +1,13 @@
 import { useEffect } from "react";
 import { connect } from "react-redux";
-const { getUsersRequest } = require("../store/actions/users");
+import { getUsersRequest } from "../store/actions/users";
+import { UsersList } from "./UsersList";
 
-function _App(props) {
-  const { getUsersRequest, users } = props;
+function _App({ getUsersRequest, users }) {
   useEffect(getUsersRequest, [getUsersRequest]);
-
   return (
-    <div>
-      {users.map((user) => (
-        <div key={user.id}>
-          {user.firstName} {user.lastName}
-        </div>
-      ))}
+    <div style={{ margin: "0 auto", padding: "20px", maxWidth: "600px" }}>
+      <UsersList users={users} />
     </div>
   );
 }
