@@ -1,4 +1,4 @@
-import { ListGroup, ListGroupItem } from "reactstrap";
+import { ListGroup, ListGroupItem, Button } from "reactstrap";
 import "bootstrap/dist/css/bootstrap.min.css";
 
 export function UsersList({ users }) {
@@ -6,7 +6,16 @@ export function UsersList({ users }) {
     <ListGroup>
       {users.sort(usersByName).map((user) => (
         <ListGroupItem key={user.id}>
-          {user.firstName} {user.lastName}
+          <section style={{ display: "flex" }}>
+            <div style={{ flexGrow: "1", margin: "auto 0" }}>
+              {user.firstName} {user.lastName}
+            </div>
+            <div>
+              <Button outline color="danger">
+                Delete
+              </Button>
+            </div>
+          </section>
         </ListGroupItem>
       ))}
     </ListGroup>
