@@ -1,7 +1,7 @@
 import { ListGroup, ListGroupItem, Button } from "reactstrap";
 import "bootstrap/dist/css/bootstrap.min.css";
 
-export function UsersList({ users }) {
+export function UsersList({ users, handleDeleteUser }) {
   return (
     <ListGroup>
       {users.sort(usersByName).map((user) => (
@@ -11,7 +11,11 @@ export function UsersList({ users }) {
               {user.firstName} {user.lastName}
             </div>
             <div>
-              <Button outline color="danger">
+              <Button
+                outline
+                color="danger"
+                onClick={() => handleDeleteUser(user.id)}
+              >
                 Delete
               </Button>
             </div>

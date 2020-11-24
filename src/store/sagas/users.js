@@ -1,4 +1,11 @@
-import { takeEvery, takeLatest, call, put, fork } from "redux-saga/effects";
+import {
+  take,
+  takeEvery,
+  takeLatest,
+  call,
+  put,
+  fork,
+} from "redux-saga/effects";
 import * as actions from "../actions/users";
 import * as api from "../../api/users";
 
@@ -28,7 +35,24 @@ function* createUser(action) {
   }
 }
 
+function* watchDeleteUserRequest() {
+  while (true) {
+    const action = yield take(actions.Types.DELETE_USER_REQUEST, deleteUser);
+    yield call(deleteUser, action.payload.id);
+  }
+}
+
+function* deleteUser(id) {
+  try {
+    yield call(api.deleteUser, id);
+    yield call(getUsers);
+  } catch (e) {
+    console.error(e);
+  }
+}
+
 export const usersSagas = [
   fork(watchGetUsersRequest),
   fork(watchCreateUserRequest),
+  fork(watchDeleteUserRequest),
 ];
