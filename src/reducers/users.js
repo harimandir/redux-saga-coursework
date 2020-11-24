@@ -6,7 +6,7 @@ const initialState = {
 
 export function usersReducer(state = initialState, action) {
   switch (action.type) {
-    case Types.GET_USERS_REQUEST:
+    case Types.GET_USERS_SUCCESS:
       return {
         items: action.payload.items,
       };
