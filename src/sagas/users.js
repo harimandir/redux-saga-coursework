@@ -9,8 +9,10 @@ function* watchGetUsersRequest() {
 function* getUsers() {
   try {
     const response = yield call(api.getUsers);
-    yield put(actions.Types.GET_USERS_SUCCESS, response.data.data);
-  } catch (e) {}
+    yield put(actions.getUsersSuccess(response.data.data));
+  } catch (e) {
+    console.error(e);
+  }
 }
 
 export const usersSagas = [fork(watchGetUsersRequest)];
