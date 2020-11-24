@@ -2,16 +2,17 @@ import React, { Component } from "react";
 import { Form, FormGroup, Label, Input, Button } from "reactstrap";
 
 export class NewUserForm extends Component {
-  state = {
+  initialState = {
     firstName: "",
     lastName: "",
   };
+  state = this.initialState;
 
   render() {
     return (
       <Form onSubmit={this.handleSubmit}>
-        {this.renderInput("First name", "firstName")}
-        {this.renderInput("Last name", "lastName")}
+        {this.renderInput("First name", "firstName", this.state.firstName)}
+        {this.renderInput("Last name", "lastName", this.state.lastName)}
         <FormGroup>
           <Button block outline type="submit" color="primary">
             Submit
@@ -23,18 +24,20 @@ export class NewUserForm extends Component {
 
   handleSubmit = (e) => {
     e.preventDefault();
+
+    this.props.onSubmit(this.state);
+    this.setState(this.initialState);
   };
 
-  renderInput = (label, name) => {
+  renderInput = (label, name, value) => {
     return (
       <FormGroup>
         <Label>{label}</Label>
         <Input
           required
           placeholder={label}
-          name={name}
-          value={this.state[{ name }]}
           onChange={this.handleInputChange}
+          {...{ name, value }}
         />
       </FormGroup>
     );
