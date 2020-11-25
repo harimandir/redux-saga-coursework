@@ -18,7 +18,7 @@ function* getUsers() {
     const response = yield call(api.getUsers);
     yield put(actions.getUsersSuccess(response.data.data));
   } catch (e) {
-    console.error(e);
+    yield put(actions.usersError("Error retrieving users"));
   }
 }
 
@@ -31,7 +31,7 @@ function* createUser(action) {
     yield call(api.createUser, action.payload);
     yield call(getUsers);
   } catch (e) {
-    console.error(e);
+    yield put(actions.usersError("Error creating user"));
   }
 }
 
@@ -47,7 +47,7 @@ function* deleteUser(id) {
     yield call(api.deleteUser, id);
     yield call(getUsers);
   } catch (e) {
-    console.error(e);
+    yield put(actions.usersError("Error deleting user"));
   }
 }
 
