@@ -4,20 +4,29 @@ import {
   getUsersRequest,
   createUserRequest,
   deleteUserRequest,
+  usersError,
 } from "../store/actions/users";
-import { UsersList } from "./UsersList";
+import { Alert } from "reactstrap";
 import { NewUserForm } from "./NewUserForm";
+import { UsersList } from "./UsersList";
 
 function _App({
+  errorMessage,
+  usersError,
+  createUserRequest,
   getUsersRequest,
   users,
-  createUserRequest,
   deleteUserRequest,
 }) {
   useEffect(getUsersRequest, [getUsersRequest]);
 
+  const handleToggleAlert = () => usersError("");
+
   return (
     <div style={{ margin: "0 auto", padding: "20px", maxWidth: "600px" }}>
+      <Alert color="danger" isOpen={!!errorMessage} toggle={handleToggleAlert}>
+        {errorMessage}
+      </Alert>
       <NewUserForm onSubmit={createUserRequest} />
       <UsersList users={users} handleDeleteUser={deleteUserRequest} />
     </div>
@@ -27,6 +36,7 @@ function _App({
 export const App = connect(
   ({ users }) => ({
     users: users.items,
+    errorMessage: users.error,
   }),
-  { getUsersRequest, createUserRequest, deleteUserRequest }
+  { usersError, getUsersRequest, createUserRequest, deleteUserRequest }
 )(_App);
